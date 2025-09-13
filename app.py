@@ -31,6 +31,6 @@ ax = solid.imshow(
     "Principal Values of Cauchy Stress",
     show_undeformed=False,
     show_edges=False,
-    nonlinear_subdivision=2,
+    style="wireframe",
 )
 st.pyplot(ax.get_figure())
