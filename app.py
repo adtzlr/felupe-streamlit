@@ -23,23 +23,12 @@ step = fem.Step(items=[solid], ramp=ramp, boundaries=boundaries)
 job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
-import os
 import pyvista as pv
 
 pv.start_xvfb()
 
-# Erzwinge Offscreen-Rendering vor dem ersten Import
-os.environ["PYVISTA_OFF_SCREEN"] = "true"
-os.environ["VTK_DEFAULT_RENDER_WINDOW_OFFSCREEN"] = "1"
-
-# Offscreen-Flag in PyVista setzen
-pv.OFF_SCREEN = True
-
-# Ein Plotter im Offscreen-Modus
-plotter = pv.Plotter(off_screen=True)
-
-img = solid.screenshot(plotter=plotter, show_undeformed=False, theme="static")
+img = solid.screenshot(show_undeformed=False)
 st.image("solidbody.png")
 
-# img = mesh.screenshot(show_edges=False, theme="static")
+# img = mesh.screenshot(show_edges=False)
 # st.image("mesh.png")
