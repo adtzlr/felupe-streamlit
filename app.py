@@ -27,5 +27,5 @@ import pyvista as pv
 
 pv.start_xvfb()
 
-ax = mesh.imshow(style="wireframe")
+ax = solid.imshow(show_undeformed=False, show_edges=False)
 st.pyplot(ax.get_figure())
