@@ -27,5 +27,5 @@ import pyvista as pv
 
 pv.start_xvfb()
 
-ax = solid.imshow(show_undeformed=False, show_edges=False)
+ax = solid.imshow("Principal Values of Cauchy Stress", show_undeformed=False, show_edges=False)
 st.pyplot(ax.get_figure())
