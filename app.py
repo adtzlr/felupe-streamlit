@@ -4,7 +4,9 @@ import stpyvista
 
 from stpyvista.utils import start_xvfb
 
-start_xvfb()
+if "IS_XVFB_RUNNING" not in st.session_state:
+  start_xvfb()
+  st.session_state.IS_XVFB_RUNNING = True 
 
 st.title("A Streamlit app for FElupe")
 n = st.slider("Number of points per axis", 2, 11, 3)
