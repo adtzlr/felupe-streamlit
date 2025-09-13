@@ -24,6 +24,7 @@ job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
 img = solid.screenshot(
+    "Logarithmic Strain",
     show_edges=False,
 )
 st.image("solidbody.png")
