@@ -23,5 +23,5 @@ step = fem.Step(items=[solid], ramp=ramp, boundaries=boundaries)
 job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
-ax = solid.imshow("Principal Values of Cauchy Stress", show_undeformed=False)
+ax = mesh.imshow()
 st.pyplot(ax.get_figure())
