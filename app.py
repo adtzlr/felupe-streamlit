@@ -1,5 +1,10 @@
 import streamlit as st
 import felupe as fem
+import stpyvista
+
+from stpyvista.utils import start_xvfb
+
+start_xvfb()
 
 st.title("A Streamlit app for FElupe")
 n = st.slider("Number of points per axis", 2, 11, 3)
@@ -23,12 +28,8 @@ step = fem.Step(items=[solid], ramp=ramp, boundaries=boundaries)
 job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
-import pyvista as pv
-
-pv.start_xvfb()
-
-img = solid.screenshot(show_undeformed=False)
-st.image("solidbody.png")
+plotter = solid.plot(show_undeformed=False)
+stpyvista(plotter)
 
 # img = mesh.screenshot(show_edges=False)
 # st.image("mesh.png")
