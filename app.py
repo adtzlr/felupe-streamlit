@@ -23,8 +23,8 @@ step = fem.Step(items=[solid], ramp=ramp, boundaries=boundaries)
 job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
-img = solid.screenshot(show_undeformed=False)
+img = solid.screenshot(show_undeformed=False, theme="static")
 st.image("solidbody.png")
 
-img = mesh.screenshot(show_edges=False)
+img = mesh.screenshot(show_edges=False, theme="static")
 st.image("mesh.png")
