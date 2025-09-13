@@ -23,6 +23,10 @@ step = fem.Step(items=[solid], ramp=ramp, boundaries=boundaries)
 job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
+import os
+os.environ["PYVISTA_OFF_SCREEN"] = "true"
+os.environ["VTK_DEFAULT_RENDER_WINDOW_OFFSCREEN"] = "1"
+
 import pyvista
 
 pyvista.start_xvfb()
