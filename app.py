@@ -24,6 +24,7 @@ job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
 img = solid.screenshot(
-    # show_edges=False,
+    show_undeformed=False,
+    style="wireframe",
 )
 st.image("solidbody.png")
