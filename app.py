@@ -23,6 +23,10 @@ step = fem.Step(items=[solid], ramp=ramp, boundaries=boundaries)
 job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
+import pyvista
+
+pyvista.start_xvfb()
+
 img = solid.screenshot(
     show_undeformed=False,
     show_edges=False,
