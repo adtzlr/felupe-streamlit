@@ -25,6 +25,6 @@ job.evaluate(tol=1e-2)
 
 img = solid.screenshot(
     show_undeformed=False,
-    style="wireframe",
+    # style="wireframe",
 )
 st.image("solidbody.png")
