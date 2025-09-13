@@ -25,7 +25,7 @@ job.evaluate(tol=1e-2)
 
 img = solid.screenshot(
     show_undeformed=False,
-    style="wireframe",
+    show_edges=False,
     nonlinear_subdivision=2,
 )
 st.image("solidbody.png")
