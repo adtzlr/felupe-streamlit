@@ -24,7 +24,6 @@ job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
 img = solid.screenshot(
-    "Cauchy Stress",
     show_undeformed=False,
     show_edges=False,
     nonlinear_subdivision=3,
