@@ -1,3 +1,4 @@
 streamlit
 pyvista<0.45.0
+vtk
 felupe[all]
