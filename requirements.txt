@@ -1,15 +1,3 @@
 streamlit
-pip
-numpy
-matplotlib
 pyvista
-stpyvista
-requests
-nest_asyncio
-trame
-trame-client
-trame-components
-trame-server
-trame-vtk
-trame-vuetify
 felupe[all]

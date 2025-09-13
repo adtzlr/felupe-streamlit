@@ -1,11 +1,5 @@
 import streamlit as st
-import stpyvista
-from stpyvista.utils import start_xvfb
 import felupe as fem
-
-if "IS_XVFB_RUNNING" not in st.session_state:
-  start_xvfb()
-  st.session_state.IS_XVFB_RUNNING = True 
 
 st.title("A Streamlit app for FElupe")
 n = st.slider("Number of points per axis", 2, 11, 4)
@@ -29,5 +23,5 @@ step = fem.Step(items=[solid], ramp=ramp, boundaries=boundaries)
 job = fem.Job(steps=[step], callback=show_progress)
 job.evaluate(tol=1e-2)
 
-plotter = solid.plot("Principal Values of Cauchy Stress")
-stpyvista(plotter)
+ax = solid.imshow("Principal Values of Cauchy Stress")
+st.pyplot(ax.get_figure())
