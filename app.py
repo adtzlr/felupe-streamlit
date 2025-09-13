@@ -26,6 +26,8 @@ job.evaluate(tol=1e-2)
 import os
 import pyvista as pv
 
+pv.start_xvfb()
+
 # Erzwinge Offscreen-Rendering vor dem ersten Import
 os.environ["PYVISTA_OFF_SCREEN"] = "true"
 os.environ["VTK_DEFAULT_RENDER_WINDOW_OFFSCREEN"] = "1"
