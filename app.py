@@ -11,7 +11,13 @@ st.title("A Streamlit app for FElupe")
 npoints = st.sidebar.slider("Number of points per axis", 2, 7, 5)
 stretch = st.sidebar.slider("Stretch", 0.7, 1.5, 0.7)
 
-options = ["Hexahedron", "Tetra", "Quadratic Tetra"]
+options = [
+    "Hexahedron",
+    "Quadratic Hexahedron",
+    "Tri-Quadratic Hexahedron",
+    "Tetra",
+    "Quadratic Tetra",
+]
 selection = st.sidebar.selectbox("Cell type", options)
 topoints = st.sidebar.checkbox("Project stress to points")
 
@@ -19,6 +25,12 @@ mesh = fem.Cube(n=npoints)
 
 if selection == "Hexahedron":
     region = fem.RegionHexahedron(mesh)
+elif selection == "Quadratic Hexahedron":
+    region = fem.RegionQuadraticHexahedron(mesh.add_midpoints_edges())
+elif selection == "Tri-Quadratic Hexahedron":
+    region = fem.RegionTriQuadraticHexahedron(
+        mesh.add_midpoints_edges().add_midpoints_faces().add_midpoints.volumes()
+    )
 elif selection == "Tetra":
     region = fem.RegionTetra(mesh.triangulate())
 elif selection == "Quadratic Tetra":
