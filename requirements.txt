@@ -18,4 +18,5 @@ trame-components
 trame-server
 trame-vtk
 trame-vuetify
+pypardiso
 felupe[all]
