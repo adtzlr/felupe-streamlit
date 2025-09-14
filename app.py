@@ -56,7 +56,7 @@ else:
 plotter = solid.plot(
     f"Principal Values of {result}",
     show_undeformed=False,
-    nonlinear_subdivision=3,
+    nonlinear_subdivision=2,
     project=project,
 )
 stpyvista(plotter)
