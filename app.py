@@ -55,6 +55,7 @@ else:
 
 plotter = solid.plot(
     f"Principal Values of {result}",
+    show_undeformed=False,
     nonlinear_subdivision=3,
     project=project,
 )
