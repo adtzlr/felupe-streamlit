@@ -56,7 +56,7 @@ if topoints:
 else:
     project = None
 
-if "quadratic" in selection.lower():
+if "Quadratic" in selection:
     nonlinear_subdivision = 3
 else:
     nonlinear_subdivision = 1
