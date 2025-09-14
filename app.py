@@ -29,7 +29,7 @@ elif selection == "Quadratic Hexahedron":
     region = fem.RegionQuadraticHexahedron(mesh.add_midpoints_edges())
 elif selection == "Tri-Quadratic Hexahedron":
     region = fem.RegionTriQuadraticHexahedron(
-        mesh.add_midpoints_edges().add_midpoints_faces().add_midpoints.volumes()
+        mesh.add_midpoints_edges().add_midpoints_faces().add_midpoints_volumes()
     )
 elif selection == "Tetra":
     region = fem.RegionTetra(mesh.triangulate())
