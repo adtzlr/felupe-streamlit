@@ -7,7 +7,7 @@ from stpyvista.utils import start_xvfb
 
 start_xvfb()
 
-st.title("A Streamlit app for FElupe")
+st.sidebar.title("FElupe")
 npoints = st.sidebar.slider("Number of points per axis", 2, 7, 5)
 stretch = st.sidebar.slider("Stretch", 0.7, 1.5, 0.7)
 
