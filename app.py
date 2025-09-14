@@ -2,7 +2,7 @@ import streamlit as st
 import felupe as fem
 import pypardiso
 
-from stpyvista.trame_backend import stpyvista
+from stpyvista.panel_backend import stpyvista
 from stpyvista.utils import start_xvfb
 
 start_xvfb()
