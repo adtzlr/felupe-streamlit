@@ -56,14 +56,9 @@ if topoints:
 else:
     project = None
 
-if "Quadratic" in selection:
-    nonlinear_subdivision = 3
-else:
-    nonlinear_subdivision = 1
-
 plotter = solid.plot(
     f"Principal Values of {result}",
-    nonlinear_subdivision=nonlinear_subdivision,
+    nonlinear_subdivision=3,
     project=project,
 )
 stpyvista(plotter)
