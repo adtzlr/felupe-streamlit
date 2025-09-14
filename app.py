@@ -19,7 +19,9 @@ options = [
     "Quadratic Tetra",
 ]
 selection = st.sidebar.selectbox("Cell type", options)
-topoints = st.sidebar.checkbox("Project stress to points")
+
+result = st.sidebar.selectbox("Result", ["Logarithmic Strain", "Cauchy Stress"])
+topoints = st.sidebar.checkbox("Project result to points")
 
 mesh = fem.Cube(n=npoints)
 
@@ -55,6 +57,6 @@ else:
     project = None
 
 plotter = solid.plot(
-    "Principal Values of Cauchy Stress", nonlinear_subdivision=2, project=project
+    f"Principal Values of {result}", nonlinear_subdivision=2, project=project
 )
 stpyvista(plotter)
