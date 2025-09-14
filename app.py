@@ -1,37 +1,48 @@
 import streamlit as st
 import felupe as fem
-import stpyvista
+import pypardiso
 
+from stpyvista.trame_backend import stpyvista
 from stpyvista.utils import start_xvfb
 
-if "IS_XVFB_RUNNING" not in st.session_state:
-  start_xvfb()
-  st.session_state.IS_XVFB_RUNNING = True 
+start_xvfb()
 
 st.title("A Streamlit app for FElupe")
-n = st.slider("Number of points per axis", 2, 11, 3)
-v = st.slider("Stretch", 1.0, 2.0, 2.0)
+npoints = st.sidebar.slider("Number of points per axis", 2, 7, 5)
+stretch = st.sidebar.slider("Stretch", 0.7, 1.5, 0.7)
 
-progress_bar = st.progress(0)
-def show_progress(i, j, substep):
-    progress_bar.progress((1 + j) / len(move))
+options = ["Hexahedron", "Tetra", "Quadratic Tetra"]
+selection = st.sidebar.selectbox("Cell type", options)
+topoints = st.sidebar.checkbox("Project stress to points")
 
-mesh = fem.Cube(n=n).add_midpoints_edges().add_midpoints_faces().add_midpoints_volumes()
-region = fem.RegionTriQuadraticHexahedron(mesh)
-field = fem.FieldContainer([fem.Field(region, dim=3)])
+mesh = fem.Cube(n=npoints)
 
-boundaries, loadcase = fem.dof.uniaxial(field, clamped=True)
-umat = fem.NeoHooke(mu=1, bulk=2)
-solid = fem.SolidBody(umat=umat, field=field)
-move = fem.math.linsteps([0, v - 1], num=5)
+if selection == "Hexahedron":
+    region = fem.RegionHexahedron(mesh)
+elif selection == "Tetra":
+    region = fem.RegionTetra(mesh.triangulate())
+elif selection == "Quadratic Tetra":
+    region = fem.RegionQuadraticTetra(
+        mesh.triangulate().add_midpoints_edges(),
+        quadrature=fem.TetrahedronQuadrature(order=5),
+    )
+else:
+    raise TypeError("Cell type not implemented.")
 
-ramp = {boundaries["move"]: move}
-step = fem.Step(items=[solid], ramp=ramp, boundaries=boundaries)
-job = fem.Job(steps=[step], callback=show_progress)
-job.evaluate(tol=1e-2)
+field = fem.FieldContainer(fields=[fem.Field(region, dim=3)])
 
-plotter = solid.plot(show_undeformed=False)
+boundaries, loadcase = fem.dof.uniaxial(field, clamped=True, move=stretch - 1)
+solid = fem.SolidBody(umat=fem.NeoHooke(mu=1, bulk=5), field=field)
+
+step = fem.Step(items=[solid], boundaries=boundaries)
+job = fem.Job(steps=[step]).evaluate(tol=1e-2, solver=pypardiso.spsolve)
+
+if topoints:
+    project = fem.project
+else:
+    project = None
+
+plotter = solid.plot(
+    "Principal Values of Cauchy Stress", nonlinear_subdivision=2, project=project
+)
 stpyvista(plotter)
-
-# img = mesh.screenshot(show_edges=False)
-# st.image("mesh.png")
