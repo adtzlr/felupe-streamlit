@@ -42,7 +42,9 @@ else:
 
 field = fem.FieldContainer(fields=[fem.Field(region, dim=3)])
 
-boundaries, loadcase = fem.dof.uniaxial(field, clamped=True, move=stretch - 1)
+boundaries = fem.dof.uniaxial(
+    field, clamped=True, move=stretch - 1, return_loadcase=False
+)
 solid = fem.SolidBody(umat=fem.NeoHooke(mu=1, bulk=5), field=field)
 
 step = fem.Step(items=[solid], boundaries=boundaries)
