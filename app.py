@@ -5,7 +5,9 @@ import pypardiso
 from stpyvista.trame_backend import stpyvista
 from stpyvista.utils import start_xvfb
 
-start_xvfb()
+# Initial configuration
+if "xvfb" not in st.session_state:
+    st.session_state["xvfb"] = start_xvfb()
 
 st.sidebar.title("FElupe")
 npoints = st.sidebar.slider("Number of points per axis", 2, 7, 5)
