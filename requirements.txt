@@ -1,12 +1,12 @@
 pip
-streamlit>=1.45.0
+streamlit
 numpy
 matplotlib
 panel
 bokeh
 param
 pyvista
-stpyvista
+stpyvista>=0.2.1
 geovista
 colorcet
 requests
