@@ -2,8 +2,8 @@ import streamlit as st
 import felupe as fem
 import pypardiso
 
-from stpyvista.trame_backend import stpyvista
-from stpyvista.utils import start_xvfb
+from stpyvista import stpyvista
+from pantry.utils import start_xvfb
 
 # Initial configuration
 if "xvfb" not in st.session_state:
